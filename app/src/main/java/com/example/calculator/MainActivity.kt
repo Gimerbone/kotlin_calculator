@@ -8,63 +8,209 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 import com.example.calculator.databinding.ActivityMainBinding
-import com.example.calculator.Utils
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var utils = Utils()
-
-    private var buffer1: Double = 0.0
-    private var inputDigitCount: Int = 0
-    private var buffer2: Double = 0.0
-    private var input1: Double = 0.0
-    private var isCommaActive: Boolean = false
+    private var hasOperand: Boolean = false
+    private var actAdd: Boolean = false
+    private var actSubtract: Boolean = false
+    private var actMultiply: Boolean = false
+    private var actDivide: Boolean = false
+    private var actModulo: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
     }
 
-    fun onSelect(view: View) {
-        if (inputDigitCount <= 12) {
-            buffer1 = buffer1 * 10
-            inputDigitCount++
+    fun onButtonPress(v: View) {
+        val input = binding.viewResult.text.toString()
+        val setNumberToView: (String) -> Unit = { s ->
+            if (binding.viewResult.text != "0") {
+                binding.viewResult.text = binding.viewResult.text.toString().plus(s)
+            } else {
+                binding.viewResult.text = s
+            }
+        }
 
-            when (view.id) {
-                R.id.button19 -> buffer1 = buffer1 + 0.0
-                R.id.button16 -> buffer1 = buffer1 + 1.0
-                R.id.button15 -> buffer1 = buffer1 + 2.0
-                R.id.button14 -> buffer1 = buffer1 + 3.0
-                R.id.button12 -> buffer1 = buffer1 + 4.0
-                R.id.button11 -> buffer1 = buffer1 + 5.0
-                R.id.button10 -> buffer1 = buffer1 + 6.0
-                R.id.button8 -> buffer1 = buffer1 + 7.0
-                R.id.button7 -> buffer1 = buffer1 + 8.0
-                R.id.button6 -> buffer1 = buffer1 + 9.0
+        when (v.id) {
+            R.id.button0 -> setNumberToView("0")
+            R.id.button1 -> setNumberToView("1")
+            R.id.button2 -> setNumberToView("2")
+            R.id.button3 -> setNumberToView("3")
+            R.id.button4 -> setNumberToView("4")
+            R.id.button5 -> setNumberToView("5")
+            R.id.button6 -> setNumberToView("6")
+            R.id.button7 -> setNumberToView("7")
+            R.id.button8 -> setNumberToView("8")
+            R.id.button9 -> setNumberToView("9")
+            R.id.buttonComma -> binding.viewResult.text = input.plus(".")
+            R.id.buttonPercent -> binding.viewResult.text = (input.toDouble() / 100.0).toString()
+
+            R.id.buttonDel -> {
+                if (input.toDouble() % 1.00 != 0.0 && input.length == 3) {
+                    binding.viewResult.text = input.dropLast(2)
+                }
+                else if (input.length == 1) {
+                    binding.viewResult.text = "0"
+                }
+                else if (input.isNotEmpty()) {
+                    binding.viewResult.text = input.dropLast(1)
+                }
+            }
+
+            R.id.buttonAC -> {
+                binding.viewResult.text = "0"
+                binding.viewCache.text = ""
+            }
+
+            R.id.buttonAdd -> {
+                if (hasOperand) {
+                    calculateToView(true)
+                    actAdd = true
+                    actDivide = false
+                    actSubtract = false
+                    actMultiply = false
+                    actModulo = false
+                }
+                else {
+                    binding.viewCache.text = binding.viewResult.text.toString()
+                    binding.viewResult.text = ""
+                    hasOperand = true
+                    actAdd = true
+                }
+            }
+
+            R.id.buttonSub -> {
+                if (hasOperand) {
+                    calculateToView(true)
+                    actAdd = false
+                    actDivide = false
+                    actSubtract = true
+                    actMultiply = false
+                    actModulo = false
+                }
+                else {
+                    binding.viewCache.text = binding.viewResult.text.toString()
+                    binding.viewResult.text = ""
+                    hasOperand = true
+                    actSubtract = true
+                }
+            }
+
+            R.id.buttonMult -> {
+                if (hasOperand) {
+                    calculateToView(true)
+                    actAdd = false
+                    actDivide = false
+                    actSubtract = false
+                    actMultiply = true
+                    actModulo = false
+                }
+                else {
+                    binding.viewCache.text = binding.viewResult.text.toString()
+                    binding.viewResult.text = ""
+                    hasOperand = true
+                    actMultiply = true
+                }
+            }
+
+            R.id.buttonDiv -> {
+                if (hasOperand) {
+                    calculateToView(true)
+                    actAdd = false
+                    actDivide = true
+                    actSubtract = false
+                    actMultiply = false
+                    actModulo = false
+                }
+                else {
+                    binding.viewCache.text = binding.viewResult.text.toString()
+                    binding.viewResult.text = ""
+                    hasOperand = true
+                    actDivide = true
+                }
+            }
+
+            R.id.buttonMod -> {
+                if (hasOperand) {
+                    calculateToView(true)
+                    actAdd = false
+                    actDivide = false
+                    actSubtract = false
+                    actMultiply = false
+                    actModulo = true
+                }
+                else {
+                    binding.viewCache.text = binding.viewResult.text.toString()
+                    binding.viewResult.text = ""
+                    hasOperand = true
+                    actModulo = true
+                }
+            }
+
+            R.id.buttonEqual -> {
+                calculateToView(false)
+                hasOperand = false
             }
         }
     }
 
-    fun onComma(view: View) {
-        isCommaActive = true
-        buffer2 = buffer1
-        buffer1 = 0.0
-        inputDigitCount++
-    }
+    fun calculateToView(toCache: Boolean) {
+        val input = binding.viewResult.text.toString().ifEmpty { "0" }.toDouble()
+        val cache = binding.viewCache.text.toString().ifEmpty { "0" }.toDouble()
+        var result = "Err"
 
-    fun onAdd(view: View) {
-        if (isCommaActive) {
-            input1 = buffer2 + utils.convertToBehindComma(buffer1)
+        if (actAdd) {
+            result = utils.formatNumber(cache + input)
+            actAdd = false
+        }
+
+        if (actSubtract) {
+            result = utils.formatNumber(cache - input)
+            actSubtract = false
+        }
+
+        if (actMultiply) {
+            result = utils.formatNumber(cache * input)
+            actMultiply = false
+        }
+
+        if (actDivide) {
+            if (input == 0.0) {
+                result = "Err"
+            } else {
+                result = utils.formatNumber(cache / input)
+            }
+
+            actDivide = false
+        }
+
+        if (actModulo) {
+            if (input == 0.0) {
+                result = "Err"
+            } else {
+                result = utils.formatNumber(cache % input)
+            }
+
+            actModulo = false
+        }
+
+        if (toCache) {
+            binding.viewResult.text = "0"
+            binding.viewCache.text = result
+        } else {
+            binding.viewResult.text = result
+            binding.viewCache.text = ""
         }
     }
 }

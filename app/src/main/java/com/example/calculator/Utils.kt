@@ -1,13 +1,11 @@
 package com.example.calculator
 
 class Utils {
-    fun convertToBehindComma(n: Double): Double {
-        result = n
-
-        while (result >= 1.0) {
-            result = result / 10
+    fun formatNumber(num: Double): String {
+        return when {
+            num.isNaN() || num.isInfinite() -> num.toString()
+            num % 1.0 == 0.0 -> num.toLong().toString()
+            else -> String.format("%.12g", num)
         }
-
-        return result
     }
 }

@@ -19,10 +19,30 @@
     />
 
     <TextView
+        android:id="@+id/viewCache"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:gravity="bottom|end"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.9"
+        app:layout_constraintVertical_bias="0.22"
+
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:scrollHorizontally="true"
+    />
+
+    <TextView
         android:id="@+id/viewResult"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="000000000000+"
+        android:layout_height="wrap_content"
+        android:text="0"
         android:textStyle="bold"
         android:textSize="50sp"
         android:gravity="bottom|end"
@@ -30,13 +50,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.1"
         app:layout_constraintWidth_percent="0.9"
-        app:layout_constraintVertical_bias="0.25"
+        app:layout_constraintVertical_bias="0.28"
+
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:scrollHorizontally="true"
     />
 
     <Button
-        android:id="@+id/button1"
+        android:onClick="onButtonPress"
+
+        android:id="@+id/buttonDiv"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:textColor="#000000"
@@ -55,12 +80,14 @@
     />
 
     <Button
-        android:id="@+id/button2"
+        android:onClick="onButtonPress"
+
+        android:id="@+id/buttonMod"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:textColor="#000000"
-        android:text="%"
-        android:textSize="24sp"
+        android:text="MD"
+        android:textSize="22sp"
         app:backgroundTint="#D6B4FE"
         app:cornerRadius="15dp"
         app:layout_constraintHeight_percent="0.1"
@@ -74,11 +101,13 @@
         />
 
     <Button
-        android:id="@+id/button3"
+        android:onClick="onButtonPress"
+
+        android:id="@+id/buttonPercent"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:textColor="#000000"
-        android:text="( )"
+        android:text="%"
         android:textSize="24sp"
         app:backgroundTint="#D6B4FE"
         app:cornerRadius="15dp"
@@ -93,7 +122,9 @@
         />
 
     <Button
-        android:id="@+id/button4"
+        android:onClick="onButtonPress"
+
+        android:id="@+id/buttonAC"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:textColor="#000000"
@@ -112,7 +143,9 @@
         />
 
     <Button
-        android:id="@+id/button5"
+        android:onClick="onButtonPress"
+
+        android:id="@+id/buttonMult"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:textColor="#000000"
@@ -131,7 +164,9 @@
         />
 
     <Button
-        android:id="@+id/button6"
+        android:onClick="onButtonPress"
+
+        android:id="@+id/button9"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:textColor="#000000"
@@ -150,7 +185,9 @@
         />
 
     <Button
-        android:id="@+id/button7"
+        android:onClick="onButtonPress"
+
+        android:id="@+id/button8"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:textColor="#000000"
@@ -169,7 +206,9 @@
         />
 
     <Button
-        android:id="@+id/button8"
+        android:onClick="onButtonPress"
+
+        android:id="@+id/button7"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:textColor="#000000"
@@ -188,7 +227,9 @@
         />
 
     <Button
-        android:id="@+id/button9"
+        android:onClick="onButtonPress"
+
+        android:id="@+id/buttonSub"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:textColor="#000000"
@@ -207,7 +248,9 @@
         />
 
     <Button
-        android:id="@+id/button10"
+        android:onClick="onButtonPress"
+
+        android:id="@+id/button6"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:textColor="#000000"
@@ -226,7 +269,9 @@
         />
 
     <Button
-        android:id="@+id/button11"
+        android:onClick="onButtonPress"
+
+        android:id="@+id/button5"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:textColor="#000000"
@@ -245,7 +290,9 @@
         />
 
     <Button
-        android:id="@+id/button12"
+        android:onClick="onButtonPress"
+
+        android:id="@+id/button4"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:textColor="#000000"
@@ -264,7 +311,9 @@
         />
 
     <Button
-        android:id="@+id/button13"
+        android:onClick="onButtonPress"
+
+        android:id="@+id/buttonAdd"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:textColor="#000000"
@@ -283,7 +332,9 @@
         />
 
     <Button
-        android:id="@+id/button14"
+        android:onClick="onButtonPress"
+
+        android:id="@+id/button3"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:textColor="#000000"
@@ -302,7 +353,9 @@
         />
 
     <Button
-        android:id="@+id/button15"
+        android:onClick="onButtonPress"
+
+        android:id="@+id/button2"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:textColor="#000000"
@@ -321,7 +374,9 @@
         />
 
     <Button
-        android:id="@+id/button16"
+        android:onClick="onButtonPress"
+
+        android:id="@+id/button1"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:textColor="#000000"
@@ -340,7 +395,9 @@
         />
 
     <Button
-        android:id="@+id/button17"
+        android:onClick="onButtonPress"
+
+        android:id="@+id/buttonEqual"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:textColor="#000000"
@@ -359,7 +416,9 @@
         />
 
     <Button
-        android:id="@+id/button18"
+        android:onClick="onButtonPress"
+
+        android:id="@+id/buttonDel"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:textColor="#000000"
@@ -378,7 +437,9 @@
         />
 
     <Button
-        android:id="@+id/button19"
+        android:onClick="onButtonPress"
+
+        android:id="@+id/button0"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:textColor="#000000"
@@ -397,7 +458,9 @@
     />
 
     <Button
-        android:id="@+id/button20"
+        android:onClick="onButtonPress"
+
+        android:id="@+id/buttonComma"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:textColor="#000000"
