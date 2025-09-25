@@ -57,8 +57,8 @@ class MainActivity : AppCompatActivity() {
             R.id.buttonPercent -> binding.viewResult.text = (input.toDouble() / 100.0).toString()
 
             R.id.buttonDel -> {
-                if (input.toDouble() % 1.00 != 0.0 && input.length == 3) {
-                    binding.viewResult.text = input.dropLast(2)
+                if (input[input.length - 2] == '.') {
+                    binding.viewResult.text = input.toDouble().toLong().toString()
                 }
                 else if (input.length == 1) {
                     binding.viewResult.text = "0"

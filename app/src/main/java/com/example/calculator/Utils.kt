@@ -5,7 +5,7 @@ class Utils {
         return when {
             num.isNaN() || num.isInfinite() -> num.toString()
             num % 1.0 == 0.0 -> num.toLong().toString()
-            else -> String.format("%.12g", num)
+            else -> String.format("%G", num)
         }
     }
 }
